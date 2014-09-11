@@ -13,6 +13,10 @@ Gem::Specification.new do |s|
   s.files       = `git ls-files`.split
   s.test_files  = `git ls-files spec/*`.split
 
+  s.add_dependency 'octokit', '~> 3.3.1'
+  s.add_dependency 'octoauth', '~> 0.0.8'
+  s.add_dependency 'mercenary', '~> 0.3.4'
+
   s.add_development_dependency 'rubocop', '~> 0.26.0'
   s.add_development_dependency 'rake', '~> 10.3.2'
   s.add_development_dependency 'coveralls', '~> 0.7.0'

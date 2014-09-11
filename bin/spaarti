@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'spaarti'
+require 'mercenary'
+
+Mercenary.program(:targit) do |p|
+  p.version Spaarti::VERSION
+  p.description 'Tool for managing local checkouts of git repos'
+  p.syntax 'spaarti [options]'
+
+  # rubocop:disable Style/LineLength
+  p.option :authfile, '-a FILE', '--authfile FILE', 'Set the auth file for GitHub credentials'
+  # rubocop:enable Style/LineLength
+
+  p.action do |_, options|
+  end
+end
