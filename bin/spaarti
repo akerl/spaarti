@@ -10,6 +10,7 @@ Mercenary.program(:targit) do |p|
 
   # rubocop:disable Style/LineLength
   p.option :authfile, '-a FILE', '--authfile FILE', 'Set the auth file for GitHub credentials'
+  p.option :directory, '-d PATH', '--directory PATH', 'Set base directory for repos'
   # rubocop:enable Style/LineLength
 
   p.action do |_, options|
