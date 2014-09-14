@@ -1,6 +1,9 @@
+$:.unshift File.expand_path('../lib/', __FILE__)
+require 'spaarti/version'
+
 Gem::Specification.new do |s|
   s.name        = 'spaarti'
-  s.version     = '0.0.0'
+  s.version     = Spaarti::VERSION
   s.date        = Time.now.strftime("%Y-%m-%d")
 
   s.summary     = 'Tool to maintain local clones of repos you have access to on GitHub'
