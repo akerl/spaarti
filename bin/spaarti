@@ -13,6 +13,6 @@ Mercenary.program(:targit) do |p|
   p.option :directory, '-d PATH', '--directory PATH', 'Set base directory for repos'
   # rubocop:enable Style/LineLength
 
-  p.action do |_, options|
+  p.action do |_, _|
   end
 end
