@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files  = `git ls-files spec/*`.split
 
   s.add_dependency 'octokit', '~> 3.5.2'
-  s.add_dependency 'octoauth', '~> 0.0.8'
+  s.add_dependency 'octoauth', '~> 0.0.9'
   s.add_dependency 'mercenary', '~> 0.3.4'
 
   s.add_development_dependency 'rubocop', '~> 0.27.0'
