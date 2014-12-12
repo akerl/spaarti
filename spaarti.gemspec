@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'octoauth', '~> 0.0.9'
   s.add_dependency 'mercenary', '~> 0.3.4'
 
-  s.add_development_dependency 'rubocop', '~> 0.27.0'
+  s.add_development_dependency 'rubocop', '~> 0.28.0'
   s.add_development_dependency 'rake', '~> 10.4.0'
   s.add_development_dependency 'coveralls', '~> 0.7.0'
   s.add_development_dependency 'rspec', '~> 3.1.0'
