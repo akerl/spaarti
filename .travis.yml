@@ -1,13 +1,15 @@
 language: ruby
 cache: bundler
+sudo: false
 rvm:
-- 2.1.0
-- 2.0.0
-- 1.9.3
+- 2.2.0
+- 2.1.5
+- 2.0.0-p598
+- 1.9.3-p551
 notifications:
   email: false
   irc:
     template:
     - "%{repository}/%{branch}/%{build_number}: %{message} -- %{build_url}"
     channels:
-      secure: ZPiuBcQeVXDcRVwM8HDWIvfKu3r+FYUdk3d5VdcfVOjTFi+nnC4I5bfpPlJdF/RWssXCRbqqQ/FuOFdIJhkGF1vW1/xCtjQOcX1gyGsWDak5j5DO4oq0iZHGwnGdLB/jyRLedC6QvbxxG+oTfXBuBlwhRYlEHBLx/jKj7NA20l0=
+    - irc.oftc.net#akerl
