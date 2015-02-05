@@ -11,10 +11,6 @@ Mercenary.program(:spaarti) do |p|
   p.option :config, '-c FILE', '--config FILE', 'Config file'
 
   p.action do |_, options|
-    unless options[:config]
-      puts p
-      exit 1
-    end
     Spaarti.new(options).sync!
   end
 end

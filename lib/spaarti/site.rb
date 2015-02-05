@@ -1,4 +1,6 @@
 require 'cymbal'
+require 'octoauth'
+require 'octokit'
 
 ##
 # Main Spaarti code, defines defaults and Site object
@@ -7,9 +9,9 @@ module Spaarti
 
   DEFAULT_CONFIG = {
     base_path: './',
-    auth_file: nil,
+    auth_file: :default,
     exclude: [],
-    format: '%{user}/%{repo}',
+    format: '%{full_name}',
     git_config: []
   }
 
@@ -17,18 +19,67 @@ module Spaarti
   # Site object, represents a group of repos with a config
   class Site
     def initialize(options)
-      @config = load_config(options[:config])
+      @options = options
+      if options[:config] && !File.exist?(options[:config])
+        fail 'Config file does not exist'
+      end
+      @options[:config] ||= DEFAULT_CONFIG_PATH
+    end
+
+    def sync!
+      Dir.chdir(config[:base_path]) do
+        repos.each { |repo| repo.sync! config.subset(:format, :git_config) }
+      end
     end
 
     private
 
-    def load_config(path)
-      fail "File does not exist: #{path}" if path && !File.exist?(path)
-      path ||= DEFAULT_CONFIG_PATH
+    def config
+      @config ||= build_config
+    end
+
+    def build_config
+      path = @options[:config]
       config = DEFAULT_CONFIG.dup
       return config unless File.exist?(path)
       file = File.open(path) { |fh| YAML.load fh.read }
+      return nest if file.is_a? Array
       config.merge! Cymbal.symbolize(file)
     end
+
+    def client
+      @client ||= Octokit::Client.new(
+        access_token: auth.token,
+        auto_paginate: true,
+        default_media_type: 'application/vnd.github.moondragon+json'
+      )
+    end
+
+    def auth
+      @auth ||= Octoauth.new(
+        note: 'spaarti',
+        file: config[:auth_file],
+        autosave: true
+      )
+    end
+
+    def repos
+      @repos ||= client.repos.map do |data|
+        next if excluded(data.name) || excluded(data.full_name)
+        Repo.new data.to_h
+      end
+    end
+
+    def excluded(string)
+      config[:exclude].any? { |x| string.match(x) }
+    end
+  end
+end
+
+##
+# Add .subset to Hash for selecting a subhash
+class Hash
+  def subset(*keys)
+    select { |k| keys.include? k }
   end
 end
