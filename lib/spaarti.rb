@@ -12,6 +12,5 @@ module Spaarti
 end
 
 require 'spaarti/version'
-require 'spaarti/config'
 require 'spaarti/repo'
 require 'spaarti/site'

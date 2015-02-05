@@ -3,16 +3,18 @@
 require 'spaarti'
 require 'mercenary'
 
-Mercenary.program(:targit) do |p|
+Mercenary.program(:spaarti) do |p|
   p.version Spaarti::VERSION
   p.description 'Tool for managing local checkouts of git repos'
   p.syntax 'spaarti [options]'
 
-  # rubocop:disable Style/LineLength
-  p.option :authfile, '-a FILE', '--authfile FILE', 'Set the auth file for GitHub credentials'
-  p.option :directory, '-d PATH', '--directory PATH', 'Set base directory for repos'
-  # rubocop:enable Style/LineLength
+  p.option :config, '-c FILE', '--config FILE', 'Config file'
 
-  p.action do |_, _|
+  p.action do |_, options|
+    unless options[:config]
+      puts p
+      exit 1
+    end
+    Spaarti.new(options).sync!
   end
 end

@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.version     = Spaarti::VERSION
   s.date        = Time.now.strftime("%Y-%m-%d")
 
-  s.summary     = 'Tool to maintain local clones of repos you have access to on GitHub'
-  s.description = "Tool to maintain local clones of repos you have access to on GitHub"
+  s.summary     = 'Helper for cloning GitHub repos'
+  s.description = 'Maintain local clones of repos you have access to on GitHub'
   s.authors     = ['Les Aker']
   s.email       = 'me@lesaker.org'
   s.homepage    = 'https://github.com/akerl/spaarti'
@@ -15,10 +15,12 @@ Gem::Specification.new do |s|
 
   s.files       = `git ls-files`.split
   s.test_files  = `git ls-files spec/*`.split
+  s.executables = ['spaarti']
 
   s.add_dependency 'octokit', '~> 3.7.0'
   s.add_dependency 'octoauth', '~> 1.0.0'
   s.add_dependency 'mercenary', '~> 0.3.4'
+  s.add_dependency 'cymbal', '~> 1.0.0'
 
   s.add_development_dependency 'rubocop', '~> 0.28.0'
   s.add_development_dependency 'rake', '~> 10.4.0'
