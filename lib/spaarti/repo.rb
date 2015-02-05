@@ -12,9 +12,9 @@ module Spaarti
     end
 
     def sync!
-      # return found if Dir.exist?(@path)
-      # repo = clone(@path)
-      # config repo
+      return found if Dir.exist?(@path)
+      repo = clone
+      config repo
       add_upstream if @raw[:fork]
     end
 
