@@ -1,6 +1,7 @@
 require 'cymbal'
 require 'octoauth'
 require 'octokit'
+require 'pathname'
 
 ##
 # Main Spaarti code, defines defaults and Site object
@@ -27,7 +28,18 @@ module Spaarti
     end
 
     def sync!
-      Dir.chdir(config[:base_path]) { repos.each(&:sync!) }
+      Dir.chdir(config[:base_path]) do
+        repos.each(&:sync!)
+        purge! if @options[:purge]
+      end
+    end
+
+    def purge!
+      Dir.glob('**/.git').each do |git_dir|
+        repo = Pathname.new(git_dir).dirname
+        next if repos.any? { |x| x.parent_of(repo) }
+        Pathname.rmtree repo
+      end
     end
 
     private

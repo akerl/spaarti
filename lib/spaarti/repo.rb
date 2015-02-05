@@ -1,3 +1,5 @@
+require 'pathname'
+
 module Spaarti
   ##
   # Repo object, handles individual repo syncing and state
@@ -13,6 +15,10 @@ module Spaarti
       return found if Dir.exist?(@path)
       clone
       Dir.chdir(@path) { config && add_upstream }
+    end
+
+    def parent_of(repo)
+      repo.relative_path_from(Pathname.new(@path)).each_filename.first != '..'
     end
 
     private
