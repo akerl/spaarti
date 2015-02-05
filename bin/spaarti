@@ -10,6 +10,7 @@ Mercenary.program(:spaarti) do |p|
 
   p.option :config, '-c FILE', '--config FILE', 'Config file'
   p.option :purge, '-p', '--purge', 'Remove orphaned repos'
+  p.option :quiet, '-q', '--quiet', 'Silence standard output'
 
   p.action do |_, options|
     Spaarti.new(options).sync!

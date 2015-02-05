@@ -12,7 +12,7 @@ module Spaarti
     end
 
     def sync!
-      return found if Dir.exist?(@path)
+      return log("#{@raw[:full_name]} already cloned") if Dir.exist?(@path)
       clone
       Dir.chdir(@path) { config && add_upstream }
     end
@@ -23,22 +23,40 @@ module Spaarti
 
     private
 
-    def found
-      puts "#{@raw[:full_name]} already cloned"
+    def log(msg)
+      puts msg unless @params[:quiet]
+    end
+
+    def err(msg)
+      STDERR.puts msg
+    end
+
+    def run(cmd, error_msg)
+      res = system "#{cmd} &>/dev/null"
+      err(error_msg) unless res
     end
 
     def clone
-      system "git clone '#{@raw[:ssh_url]}' '#{@path}'"
+      log "Cloning #{@raw[:ssh_url]} to #{@path}"
+      run(
+        "git clone '#{@raw[:ssh_url]}' '#{@path}' &>/dev/null",
+        "Failed to clone #{@raw[:ssh_url]}"
+      )
     end
 
     def config
-      @params[:git_config].each { |k, v| system "git config '#{k}' '#{v}'" }
+      @params[:git_config].each do |k, v|
+        run("git config '#{k}' '#{v}'", "Failed to set config for #{@path}")
+      end
     end
 
     def add_upstream
       return unless @raw[:fork]
       upstream = @client.repo(@raw[:id]).source.git_url
-      system "git remote add upstream '#{upstream}'"
+      run(
+        "git remote add upstream '#{upstream}'",
+        "Failed to add upstrema for #{@path}"
+      )
     end
   end
 end
