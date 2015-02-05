@@ -1,15 +1,21 @@
+require 'rugged'
+
 module Spaarti
   ##
   # Repo object, handles individual repo syncing and state
   class Repo
-    def initialize(data)
+    def initialize(data, client, params)
       @raw = data
+      @client = client
+      @params = params
+      @path = @params[:format] % @raw
     end
 
-    def sync!(params)
-      path = params[:format] % @raw
-      return found if Dir.exist?(path)
-      clone(path) && config(path, params[:git_config])
+    def sync!
+      # return found if Dir.exist?(@path)
+      # repo = clone(@path)
+      # config repo
+      add_upstream if @raw[:fork]
     end
 
     private
@@ -18,14 +24,17 @@ module Spaarti
       puts "#{@raw[:full_name]} already cloned"
     end
 
-    def clone(path)
-      system "git clone '#{@raw[:ssh_url]}' '#{path}'"
+    def clone
+      Rugged::Repository.clone_at(@raw[:ssh_url], @path)
     end
 
-    def config(path, git_config)
-      Dir.chdir(path) do
-        git_config.each { |k, v| system "git config '#{k}' '#{v}'" }
-      end
+    def config(repo)
+      @params[:git_config].each { |key, value| repo.config[key] = value }
+    end
+
+    def add_upstream
+      upstream = @client.repo(@raw[:id]).source.git_url
+      Dir.chdir(@path) { system "git remote add upstream '#{upstream}'" }
     end
   end
 end

@@ -27,9 +27,7 @@ module Spaarti
     end
 
     def sync!
-      Dir.chdir(config[:base_path]) do
-        repos.each { |repo| repo.sync! config.subset(:format, :git_config) }
-      end
+      Dir.chdir(config[:base_path]) { repos.each(&:sync!) }
     end
 
     private
@@ -66,7 +64,7 @@ module Spaarti
     def repos
       @repos ||= client.repos.map do |data|
         next if excluded(data.name) || excluded(data.full_name)
-        Repo.new data.to_h
+        Repo.new data.to_h, client, config.subset(:format, :git_config)
       end
     end
 
