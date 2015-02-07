@@ -4,15 +4,15 @@ module Spaarti
   ##
   # Repo object, handles individual repo syncing and state
   class Repo
-    def initialize(data, client, params)
-      @raw = data
+    def initialize(data, client, params = {})
+      @data = data
       @client = client
-      @params = params
-      @path = @params[:format] % @raw
+      @options = params
+      @path = @options[:format] % @data
     end
 
     def sync!
-      return log("#{@raw[:full_name]} already cloned") if Dir.exist?(@path)
+      return log("#{@data[:full_name]} already cloned") if Dir.exist?(@path)
       clone
       Dir.chdir(@path) { config && add_upstream }
     end
@@ -24,7 +24,7 @@ module Spaarti
     private
 
     def log(msg)
-      puts msg unless @params[:quiet]
+      puts msg unless @options[:quiet]
     end
 
     def err(msg)
@@ -37,22 +37,22 @@ module Spaarti
     end
 
     def clone
-      log "Cloning #{@raw[:ssh_url]} to #{@path}"
+      log "Cloning #{@data[:ssh_url]} to #{@path}"
       run(
-        "git clone '#{@raw[:ssh_url]}' '#{@path}' &>/dev/null",
-        "Failed to clone #{@raw[:ssh_url]}"
+        "git clone '#{@data[:ssh_url]}' '#{@path}' &>/dev/null",
+        "Failed to clone #{@data[:ssh_url]}"
       )
     end
 
     def config
-      @params[:git_config].each do |k, v|
+      @options[:git_config].each do |k, v|
         run("git config '#{k}' '#{v}'", "Failed to set config for #{@path}")
       end
     end
 
     def add_upstream
-      return unless @raw[:fork]
-      upstream = @client.repo(@raw[:id]).source.git_url
+      return unless @data[:fork]
+      upstream = @client.repo(@data[:id]).source.git_url
       run(
         "git remote add upstream '#{upstream}'",
         "Failed to add upstrema for #{@path}"

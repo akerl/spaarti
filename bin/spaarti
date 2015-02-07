@@ -8,7 +8,7 @@ Mercenary.program(:spaarti) do |p|
   p.description 'Tool for managing local checkouts of git repos'
   p.syntax 'spaarti [options]'
 
-  p.option :config, '-c FILE', '--config FILE', 'Config file'
+  p.option :config_file, '-c FILE', '--config FILE', 'Config file'
   p.option :purge, '-p', '--purge', 'Remove orphaned repos'
   p.option :quiet, '-q', '--quiet', 'Silence standard output'
 

@@ -6,29 +6,30 @@ require 'pathname'
 ##
 # Main Spaarti code, defines defaults and Site object
 module Spaarti
-  DEFAULT_CONFIG_PATH = '~/.spaarti.yml'
-
-  DEFAULT_CONFIG = {
+  DEFAULT_OPTIONS = {
     base_path: './',
     auth_file: :default,
+    config_file: '~/.spaarti.yml',
     exclude: [],
     format: '%{full_name}',
-    git_config: []
+    git_config: [],
+    quiet: false,
+    purge: false
   }
 
   ##
-  # Site object, represents a group of repos with a config
+  # Site object, represents a group of repos
   class Site
-    def initialize(options)
-      @options = options
-      if options[:config] && !File.exist?(options[:config])
+    def initialize(params = {})
+      if params[:config_file] && !File.exist?(params[:config_file])
         fail 'Config file does not exist'
       end
-      @options[:config] ||= DEFAULT_CONFIG_PATH
+      @options = DEFAULT_OPTIONS.dup.merge params
+      load_config
     end
 
     def sync!
-      Dir.chdir(config[:base_path]) do
+      Dir.chdir(@options[:base_path]) do
         repos.each(&:sync!)
         purge! if @options[:purge]
       end
@@ -44,17 +45,10 @@ module Spaarti
 
     private
 
-    def config
-      @config ||= build_config
-    end
-
-    def build_config
-      path = @options[:config]
-      config = DEFAULT_CONFIG.dup
-      return config unless File.exist?(path)
-      file = File.open(path) { |fh| YAML.load fh.read }
-      return nest if file.is_a? Array
-      config.merge! Cymbal.symbolize(file)
+    def load_config
+      return unless File.exist?(@options[:config_file])
+      config = File.open(@options[:config_file]) { |fh| YAML.load fh.read }
+      @options.merge! Cymbal.symbolize(config)
     end
 
     def client
@@ -68,7 +62,7 @@ module Spaarti
     def auth
       @auth ||= Octoauth.new(
         note: 'spaarti',
-        file: config[:auth_file],
+        file: @options[:auth_file],
         autosave: true
       )
     end
@@ -76,12 +70,12 @@ module Spaarti
     def repos
       @repos ||= client.repos.map do |data|
         next if excluded(data.name) || excluded(data.full_name)
-        Repo.new data.to_h, client, config.subset(:format, :git_config)
+        Repo.new data.to_h, client, @options.subset(:format, :git_config)
       end
     end
 
     def excluded(string)
-      config[:exclude].any? { |x| string.match(x) }
+      @options[:exclude].any? { |x| string.match(x) }
     end
   end
 end
