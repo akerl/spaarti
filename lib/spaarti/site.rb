@@ -9,7 +9,7 @@ module Spaarti
   DEFAULT_OPTIONS = {
     base_path: './',
     auth_file: :default,
-    config_file: '~/.spaarti.yml',
+    config_file: File.expand_path('~/.spaarti.yml'),
     exclude: [],
     format: '%{full_name}',
     git_config: [],
@@ -21,8 +21,9 @@ module Spaarti
   # Site object, represents a group of repos
   class Site
     def initialize(params = {})
-      if params[:config_file] && !File.exist?(params[:config_file])
-        fail 'Config file does not exist'
+      if params[:config_file]
+        params[:config_file] = File.expand_path params[:config_file]
+        fail 'Conf file does not exist' unless File.exist? params[:config_file]
       end
       @options = DEFAULT_OPTIONS.dup.merge params
       load_config
