@@ -21,16 +21,12 @@ module Spaarti
   # Site object, represents a group of repos
   class Site
     def initialize(params = {})
-      if params[:config_file]
-        params[:config_file] = File.expand_path params[:config_file]
-        fail 'Conf file does not exist' unless File.exist? params[:config_file]
-      end
       @options = DEFAULT_OPTIONS.dup.merge params
-      load_config
+      load_config(params.include? :config_file)
     end
 
     def sync!
-      Dir.chdir(@options[:base_path]) do
+      Dir.chdir(File.expand_path @options[:base_path]) do
         repos.each(&:sync!)
         purge! if @options[:purge]
       end
@@ -46,8 +42,12 @@ module Spaarti
 
     private
 
-    def load_config
-      return unless File.exist?(@options[:config_file])
+    def load_config(required = false)
+      @options[:config_file] = File.expand_path @options[:config_file]
+      unless File.exist?(@options[:config_file])
+        fail 'Conf file does not exist' if required
+        return
+      end
       config = File.open(@options[:config_file]) { |fh| YAML.load fh.read }
       @options.merge! Cymbal.symbolize(config)
     end
