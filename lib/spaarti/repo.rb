@@ -13,7 +13,11 @@ module Spaarti
 
     def sync!
       clone
-      Dir.chdir(@path) { config && add_upstream && update_submodules }
+      Dir.chdir(@path) do
+        config
+        add_upstream
+        update_submodules
+      end
     end
 
     def parent_of(repo)
