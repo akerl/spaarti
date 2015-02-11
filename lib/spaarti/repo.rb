@@ -12,9 +12,8 @@ module Spaarti
     end
 
     def sync!
-      return log("#{@data[:full_name]} already cloned") if Dir.exist?(@path)
       clone
-      Dir.chdir(@path) { config && add_upstream }
+      Dir.chdir(@path) { config && add_upstream && update_submodules }
     end
 
     def parent_of(repo)
@@ -37,6 +36,7 @@ module Spaarti
     end
 
     def clone
+      return log("#{@data[:full_name]} already cloned") if Dir.exist? @path
       log "Cloning #{@data[:ssh_url]} to #{@path}"
       run(
         "git clone '#{@data[:ssh_url]}' '#{@path}' &>/dev/null",
@@ -52,11 +52,16 @@ module Spaarti
 
     def add_upstream
       return unless @data[:fork]
+      return if `git remote`.split.include? 'upstream'
       upstream = @client.repo(@data[:id]).source.git_url
       run(
         "git remote add upstream '#{upstream}'",
         "Failed to add upstrema for #{@path}"
       )
+    end
+
+    def update_submodules
+      run('git submodule update --init')
     end
   end
 end
