@@ -65,7 +65,10 @@ module Spaarti
     end
 
     def update_submodules
-      run('git submodule update --init')
+      run(
+        'git submodule update --init',
+        "Failed to update submodules in #{@path}"
+      )
     end
   end
 end
