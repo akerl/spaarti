@@ -2,6 +2,7 @@ require 'cymbal'
 require 'octoauth'
 require 'octokit'
 require 'pathname'
+require 'fileutils'
 
 ##
 # Main Spaarti code, defines defaults and Site object
@@ -36,7 +37,7 @@ module Spaarti
       Dir.glob('**/.git').each do |git_dir|
         repo = Pathname.new(git_dir).dirname
         next if repos.any? { |x| x.parent_of(repo) }
-        Pathname.rmtree repo
+        FileUtils.rmtree repo
       end
     end
 
@@ -71,20 +72,12 @@ module Spaarti
     def repos
       @repos ||= client.repos.map do |data|
         next if excluded(data.name) || excluded(data.full_name)
-        Repo.new data.to_h, client, @options.subset(:format, :git_config)
+        Repo.new data.to_h, client, @options
       end
     end
 
     def excluded(string)
       @options[:exclude].any? { |x| string.match(x) }
     end
-  end
-end
-
-##
-# Add .subset to Hash for selecting a subhash
-class Hash
-  def subset(*keys)
-    select { |k| keys.include? k }
   end
 end
