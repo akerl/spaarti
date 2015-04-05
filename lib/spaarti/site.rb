@@ -13,7 +13,7 @@ module Spaarti
     config_file: File.expand_path('~/.spaarti.yml'),
     exclude: [],
     format: '%{full_name}',
-    git_config: [],
+    git_config: {},
     quiet: false,
     purge: false
   }
