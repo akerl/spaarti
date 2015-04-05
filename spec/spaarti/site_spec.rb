@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'fileutils'
 
 describe Spaarti do
-  describe Site do
-    let(:path) { 'spec/examples/base' }
+  describe 'Site' do
+    let(:path) { 'tmp/base' }
     let(:subject) { Spaarti::Site.new config_file: 'spec/examples/config.yml' }
 
     before(:each) do
@@ -12,10 +12,10 @@ describe Spaarti do
     end
 
     describe '#sync!' do
-      VCR.use_cassette('repos') do
-        it 'clones repos' do
+      it 'clones repo' do
+        VCR.use_cassette('repos') do
           subject.sync!
-          expect(File.exist? File.join(path, 'spaarti', '.git')).to be_truthy
+          expect(File.exist? "#{path}/akerl/spaarti/.git").to be_truthy
         end
       end
     end
