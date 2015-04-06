@@ -1,2 +1,3 @@
 base_path: tmp/base
 quiet: true
+auth_file: spec/examples/auth.yml
