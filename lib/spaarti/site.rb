@@ -73,7 +73,7 @@ module Spaarti
 
     def repos
       @repos ||= client.repos.map do |data|
-        next if excluded(data.name) || excluded(data.full_name)
+        next if excluded(data)
         Repo.new data.to_h, client, @options
       end.compact
     end
