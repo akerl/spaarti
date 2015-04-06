@@ -40,7 +40,9 @@ describe Spaarti do
 
       it 'supports excluding repos' do
         VCR.use_cassette('repos') do
-          Spaarti::Site.new(exclude: ['[ab]a'], config_file: config).sync!
+          Spaarti::Site.new(
+            exclude: { full_name: ['[ab]a'] }, config_file: config
+          ).sync!
         end
         expect(File.exist? "#{path}/akerl/spaarti").to be_falsey
       end
