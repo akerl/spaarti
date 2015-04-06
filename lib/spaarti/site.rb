@@ -80,7 +80,7 @@ module Spaarti
 
     def excluded(data)
       @options[:exclude].any? do |key, patterns|
-        values.any? { |pattern| data[key].match pattern }
+        patterns.any? { |pattern| data[key].match pattern }
       end
     end
   end
