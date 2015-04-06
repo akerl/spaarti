@@ -28,6 +28,7 @@ format: Format string used to determine path. Defaults to "%{full_name}", so "ak
 git_config: Hash of key/value pairs, will be set in .git/config for cloned repos. Useful for setting things like user.name/email
 quiet: Boolean, controls verbosity of status output
 purge: Boolean, true will remove repos that are on-disk but not accessible by you on GitHub
+url_type: Used to determine how to clone, one of: html, clone, git, ssh, svn. Defaults to 'ssh'
 ```
 
 The default config path is `~/.spaarti.yml`, but you can provide an alternate path with `./spaarti -c /path/to/config`

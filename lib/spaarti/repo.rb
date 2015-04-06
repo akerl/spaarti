@@ -39,12 +39,16 @@ module Spaarti
       err(error_msg) unless res
     end
 
+    def url
+      @url ||= @data["#{@options[:url_type]}_url".to_sym]
+    end
+
     def clone
       return log("#{@data[:full_name]} already cloned") if Dir.exist? @path
-      log "Cloning #{@data[:ssh_url]} to #{@path}"
+      log "Cloning #{url} to #{@path}"
       run(
-        "git clone '#{@data[:ssh_url]}' '#{@path}' &>/dev/null",
-        "Failed to clone #{@data[:ssh_url]}"
+        "git clone '#{url}' '#{@path}' &>/dev/null",
+        "Failed to clone #{url}"
       )
     end
 

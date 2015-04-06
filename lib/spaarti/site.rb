@@ -15,7 +15,8 @@ module Spaarti
     format: '%{full_name}',
     git_config: {},
     quiet: false,
-    purge: false
+    purge: false,
+    url_type: 'ssh'
   }
 
   ##
