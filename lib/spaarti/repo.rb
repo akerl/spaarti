@@ -35,7 +35,7 @@ module Spaarti
     end
 
     def run(cmd, error_msg)
-      res = system "#{cmd} &>/dev/null"
+      res = system "#{cmd} 1>/dev/null 2>/dev/null"
       err(error_msg) unless res
     end
 
