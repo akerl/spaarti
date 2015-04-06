@@ -35,7 +35,7 @@ module Spaarti
     end
 
     def run(cmd, error_msg)
-      res = system "#{cmd} &>/dev/null"
+      res = system "#{cmd}"
       err(error_msg) unless res
     end
 
@@ -47,7 +47,7 @@ module Spaarti
       return log("#{@data[:full_name]} already cloned") if Dir.exist? @path
       log "Cloning #{url} to #{@path}"
       run(
-        "git clone '#{url}' '#{@path}' &>/dev/null",
+        "git clone '#{url}' '#{@path}'",
         "Failed to clone #{url}"
       )
     end
