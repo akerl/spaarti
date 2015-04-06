@@ -24,6 +24,7 @@ module Spaarti
     def initialize(params = {})
       @options = DEFAULT_OPTIONS.dup.merge params
       load_config(params.include? :config_file)
+      auth
     end
 
     def sync!
