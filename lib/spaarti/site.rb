@@ -78,8 +78,10 @@ module Spaarti
       end.compact
     end
 
-    def excluded(string)
-      @options[:exclude].any? { |x| string.match(x) }
+    def excluded(data)
+      @options[:exclude].any? do |key, patterns|
+        values.any? { |pattern| data[key].match pattern }
+      end
     end
   end
 end

@@ -23,7 +23,7 @@ You can override the defaults by defining a config file in YAML:
 ```
 base_path: Defaults to './', this is the root that repos will be cloned to
 auth_file: Passed to OctoAuth for storing your GitHub token, the default will use ~/.octoauth.yml
-exclude: Array of strings, any repos matching any string won't be cloned (strings are treated as regex)
+exclude: Hash where keys are attributes of a repo (https://developer.github.com/v3/repos/#get) and values are array of regex pattern strings, with any repo whose attribute matches any pattern not being pulled
 format: Format string used to determine path. Defaults to "%{full_name}", so "akerl/blog" is cloned at "akerl/blog". Available keys: https://developer.github.com/v3/repos/#get
 git_config: Hash of key/value pairs, will be set in .git/config for cloned repos. Useful for setting things like user.name/email
 quiet: Boolean, controls verbosity of status output
