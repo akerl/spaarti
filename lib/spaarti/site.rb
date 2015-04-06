@@ -25,7 +25,9 @@ module Spaarti
     def initialize(params = {})
       @options = DEFAULT_OPTIONS.dup.merge params
       load_config(params.include? :config_file)
-      auth
+      if @options[:auth_file].is_a? String
+        @options[:auth_file] = File.expand_path(@options[:auth_file])
+      end
     end
 
     def sync!
