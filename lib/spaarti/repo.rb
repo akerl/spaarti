@@ -69,10 +69,12 @@ module Spaarti
     end
 
     def update_submodules
-      run(
-        'git submodule update --init',
-        "Failed to update submodules in #{@path}"
-      )
+      ['foreach git fetch --all --tags', 'update --init'].each do |cmd|
+        run(
+          "git submodule #{cmd}",
+          "Failed to update submodules in #{@path}"
+        )
+      end
     end
   end
 end
