@@ -14,9 +14,9 @@ describe Spaarti do
 
     describe '#sync!' do
       it 'clones repo' do
-        expect(File.exist? "#{path}/akerl/spaarti/.git").to be_falsey
+        expect(File.exist?("#{path}/akerl/spaarti/.git")).to be_falsey
         VCR.use_cassette('repos') { subject.sync! }
-        expect(File.exist? "#{path}/akerl/spaarti/.git").to be_truthy
+        expect(File.exist?("#{path}/akerl/spaarti/.git")).to be_truthy
       end
 
       context 'with purge enabled' do
@@ -25,7 +25,7 @@ describe Spaarti do
           VCR.use_cassette('repos') do
             Spaarti::Site.new(purge: true, config_file: config).sync!
           end
-          expect(File.exist? "#{path}/akerl/orphan").to be_falsey
+          expect(File.exist?("#{path}/akerl/orphan")).to be_falsey
         end
       end
       context 'with purge disabled' do
@@ -34,7 +34,7 @@ describe Spaarti do
           VCR.use_cassette('repos') do
             Spaarti::Site.new(purge: false, config_file: config).sync!
           end
-          expect(File.exist? "#{path}/akerl/orphan").to be_truthy
+          expect(File.exist?("#{path}/akerl/orphan")).to be_truthy
         end
       end
 
@@ -44,7 +44,7 @@ describe Spaarti do
             exclude: { full_name: ['[ab]a'] }, config_file: config
           ).sync!
         end
-        expect(File.exist? "#{path}/akerl/spaarti").to be_falsey
+        expect(File.exist?("#{path}/akerl/spaarti")).to be_falsey
       end
     end
 
@@ -54,7 +54,7 @@ describe Spaarti do
         VCR.use_cassette('repos') do
           Spaarti::Site.new(purge: true, config_file: config).sync!
         end
-        expect(File.exist? "#{path}/akerl/orphan").to be_falsey
+        expect(File.exist?("#{path}/akerl/orphan")).to be_falsey
       end
     end
   end

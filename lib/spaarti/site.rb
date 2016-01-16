@@ -17,20 +17,20 @@ module Spaarti
     quiet: false,
     purge: false,
     url_type: 'ssh'
-  }
+  }.freeze
 
   ##
   # Site object, represents a group of repos
   class Site
     def initialize(params = {})
       @options = DEFAULT_OPTIONS.dup.merge params
-      load_config(params.include? :config_file)
+      load_config(params.include?(:config_file))
       return unless @options[:auth_file].is_a? String
       @options[:auth_file] = File.expand_path(@options[:auth_file])
     end
 
     def sync!
-      Dir.chdir(File.expand_path @options[:base_path]) do
+      Dir.chdir(File.expand_path(@options[:base_path])) do
         repos.each(&:sync!)
         purge! if @options[:purge]
       end
