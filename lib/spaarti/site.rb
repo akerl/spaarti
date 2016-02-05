@@ -49,7 +49,7 @@ module Spaarti
     def load_config(required = false)
       @options[:config_file] = File.expand_path @options[:config_file]
       unless File.exist?(@options[:config_file])
-        fail 'Conf file does not exist' if required
+        raise 'Conf file does not exist' if required
         return
       end
       config = File.open(@options[:config_file]) { |fh| YAML.load fh.read }
