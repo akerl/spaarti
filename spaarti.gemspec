@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.executables = ['spaarti']
 
   s.add_dependency 'octokit', '~> 4.3.0'
-  s.add_dependency 'octoauth', '~> 1.4.0'
+  s.add_dependency 'octoauth', '~> 1.4.5'
   s.add_dependency 'mercenary', '~> 0.3.4'
   s.add_dependency 'cymbal', '~> 1.0.0'
 
