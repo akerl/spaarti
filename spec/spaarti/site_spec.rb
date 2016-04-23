@@ -12,6 +12,10 @@ describe Spaarti do
       FileUtils.mkdir_p path
     end
 
+    after(:all) do
+      FileUtils.rm_rf path
+    end
+
     describe '#sync!' do
       it 'clones repo' do
         expect(File.exist?("#{path}/akerl/spaarti/.git")).to be_falsey
