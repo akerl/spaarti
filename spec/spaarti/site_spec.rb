@@ -12,7 +12,7 @@ describe Spaarti do
       FileUtils.mkdir_p path
     end
 
-    after(:all) do
+    after(:each) do
       FileUtils.rm_rf path
     end
 

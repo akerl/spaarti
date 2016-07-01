@@ -11,6 +11,7 @@ Mercenary.program(:spaarti) do |p|
   p.option :config_file, '-c FILE', '--config FILE', 'Config file'
   p.option :purge, '-p', '--purge', 'Remove orphaned repos'
   p.option :quiet, '-q', '--quiet', 'Silence standard output'
+  p.option :url_type, '-t', '--type', 'URL type for cloning (ssh, https)'
 
   p.action do |_, options|
     Spaarti.new(options).sync!
