@@ -1,3 +1,7 @@
+# 1.0.2 / 2016-07-01
+
+* [BUGFIX] Revert previous edition; url type should be set via config file
+
 # 1.0.1 / 2016-07-01
 
 * [FEATURE] Allow --type for specifying HTTPS clones
