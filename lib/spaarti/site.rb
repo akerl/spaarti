@@ -16,7 +16,8 @@ module Spaarti
     git_config: {},
     quiet: false,
     purge: false,
-    url_type: 'ssh'
+    url_type: 'ssh',
+    api_endpoint: nil
   }.freeze
 
   ##
@@ -60,7 +61,8 @@ module Spaarti
       @client ||= Octokit::Client.new(
         access_token: auth.token,
         auto_paginate: true,
-        default_media_type: 'application/vnd.github.moondragon+json'
+        default_media_type: 'application/vnd.github.moondragon+json',
+        api_endpoint: @options[:api_endpoint]
       )
     end
 
@@ -68,7 +70,8 @@ module Spaarti
       @auth ||= Octoauth.new(
         note: 'spaarti',
         file: @options[:auth_file],
-        autosave: true
+        autosave: true,
+        api_endpoint: @options[:api_endpoint]
       )
     end
 
