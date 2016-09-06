@@ -2,5 +2,5 @@
 ##
 # Set the version (needed for Mercenary -v)
 module Spaarti
-  VERSION = '1.0.2'.freeze
+  VERSION = '1.0.3'.freeze
 end
