@@ -53,7 +53,7 @@ module Spaarti
         raise 'Conf file does not exist' if required
         return
       end
-      config = File.open(@options[:config_file]) { |fh| YAML.load fh.read }
+      config = File.open(@options[:config_file]) { |fh| YAML.safe_load fh.read }
       @options.merge! Cymbal.symbolize(config)
     end
 
