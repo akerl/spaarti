@@ -1,3 +1,7 @@
+# 1.0.5 / 2017-04-27
+
+* [ENHANCEMENT] Update deps
+
 # 1.0.3 / 2016-09-06
 
 * [FEATURE] Allow use with GitHub Enterprise by passing api_endpoint in config file
