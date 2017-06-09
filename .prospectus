@@ -1,6 +1,6 @@
 Prospectus.extra_dep('file', 'prospectus_circleci')
 
-my_slug = 'speculate'
+my_slug = 'spaarti'
 
 item do
   noop
