@@ -1,10 +1,11 @@
-$:.unshift File.expand_path('../lib/', __FILE__)
+require 'English'
+$LOAD_PATH.unshift File.expand_path('../lib/', __FILE__)
 require 'spaarti/version'
 
 Gem::Specification.new do |s|
   s.name        = 'spaarti'
   s.version     = Spaarti::VERSION
-  s.date        = Time.now.strftime("%Y-%m-%d")
+  s.date        = Time.now.strftime('%Y-%m-%d')
 
   s.summary     = 'Helper for cloning GitHub repos'
   s.description = 'Maintain local clones of repos you have access to on GitHub'
