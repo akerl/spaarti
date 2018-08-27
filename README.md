@@ -2,7 +2,6 @@ spaarti
 =========
 
 [![Gem Version](https://img.shields.io/gem/v/spaarti.svg)](https://rubygems.org/gems/spaarti)
-[![Dependency Status](https://img.shields.io/gemnasium/akerl/spaarti.svg)](https://gemnasium.com/akerl/spaarti)
 [![Build Status](https://img.shields.io/circleci/project/akerl/spaarti/master.svg)](https://circleci.com/gh/akerl/spaarti)
 [![Coverage Status](https://img.shields.io/codecov/c/github/akerl/spaarti.svg)](https://codecov.io/github/akerl/spaarti)
 [![Code Quality](https://img.shields.io/codacy/65bacb9d92d948f6ae637ce63ade3557.svg)](https://www.codacy.com/app/akerl/spaarti)
