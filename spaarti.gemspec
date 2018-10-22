@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files  = `git ls-files spec/*`.split
   s.executables = ['spaarti']
 
-  s.add_dependency 'cymbal', '~> 1.0.0'
+  s.add_dependency 'cymbal', '~> 2.0.0'
   s.add_dependency 'mercenary', '~> 0.3.4'
   s.add_dependency 'octoauth', '~> 1.5.5'
   s.add_dependency 'octokit', '~> 4.13.0'
