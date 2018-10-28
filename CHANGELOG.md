@@ -1,3 +1,7 @@
+# 1.1.0 / 2018-10-28
+
+* [ENHANCEMENT] Update Cymbal dep
+
 # 1.0.5 / 2017-04-27
 
 * [ENHANCEMENT] Update deps
