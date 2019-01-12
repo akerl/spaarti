@@ -69,6 +69,7 @@ module Spaarti
     def auth
       @auth ||= Octoauth.new(
         note: 'spaarti',
+        scopes: %w[read:org read:user repo],
         file: @options[:auth_file],
         autosave: true,
         api_endpoint: @options[:api_endpoint]

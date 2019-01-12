@@ -1,3 +1,7 @@
+# 2.0.0 / 2019-01-12
+
+* [FEATURE] Generate new GitHub API tokens with read:org, read:user, and repo scopes. This allows the token to enumerate and fetch repos from orgs the user is a member of. **This also grants read/write access to all repos, which increases the danger of the token**
+
 # 1.1.0 / 2018-10-28
 
 * [ENHANCEMENT] Update Cymbal dep
