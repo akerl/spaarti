@@ -9,12 +9,11 @@ end
 
 require 'rspec'
 require 'spaarti'
-require 'webmock'
-
-WebMock.enable!
+require 'webmock/rspec'
 
 require 'vcr'
 VCR.configure do |c|
+  c.configure_rspec_metadata!
   c.cassette_library_dir = 'spec/fixtures/cassettes'
   c.hook_into :webmock
   c.before_record do |i|

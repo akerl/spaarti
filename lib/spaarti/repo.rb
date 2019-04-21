@@ -31,7 +31,7 @@ module Spaarti
     end
 
     def err(msg)
-      STDERR.puts msg
+      warn msg
     end
 
     def run(cmd, error_msg)
