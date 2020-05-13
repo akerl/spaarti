@@ -1,3 +1,7 @@
+# 2.0.1 / 2020-05-12
+
+* [ENHANCEMENT] Update deps
+
 # 2.0.0 / 2019-01-12
 
 * [FEATURE] Generate new GitHub API tokens with read:org, read:user, and repo scopes. This allows the token to enumerate and fetch repos from orgs the user is a member of. **This also grants read/write access to all repos, which increases the danger of the token**

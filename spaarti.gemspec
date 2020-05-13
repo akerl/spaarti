@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'cymbal', '~> 2.0.0'
   s.add_dependency 'mercenary', '~> 0.3.4'
-  s.add_dependency 'octoauth', '~> 1.5.5'
-  s.add_dependency 'octokit', '~> 4.14.0'
+  s.add_dependency 'octoauth', '~> 1.7.0'
+  s.add_dependency 'octokit', '~> 4.18.0'
 
   s.add_development_dependency 'codecov', '~> 0.1.1'
   s.add_development_dependency 'fuubar', '~> 2.5.0'
