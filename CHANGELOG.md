@@ -1,3 +1,7 @@
+# 2.0.2 / 2020-05-12
+
+* [BUGFIX] Fix Octokit error
+
 # 2.0.1 / 2020-05-12
 
 * [ENHANCEMENT] Update deps
