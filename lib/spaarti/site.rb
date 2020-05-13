@@ -58,22 +58,22 @@ module Spaarti
     end
 
     def client
-      @client ||= Octokit::Client.new(
+      @client ||= Octokit::Client.new({
         access_token: auth.token,
         auto_paginate: true,
         default_media_type: 'application/vnd.github.moondragon+json',
         api_endpoint: @options[:api_endpoint]
-      )
+      }.compact)
     end
 
     def auth
-      @auth ||= Octoauth.new(
+      @auth ||= Octoauth.new({
         note: 'spaarti',
         scopes: %w[read:org read:user repo],
         file: @options[:auth_file],
         autosave: true,
         api_endpoint: @options[:api_endpoint]
-      )
+      }.compact)
     end
 
     def repos
