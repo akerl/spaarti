@@ -2,9 +2,7 @@ spaarti
 =========
 
 [![Gem Version](https://img.shields.io/gem/v/spaarti.svg)](https://rubygems.org/gems/spaarti)
-[![Build Status](https://img.shields.io/travis/com/akerl/spaarti.svg)](https://travis-ci.com/akerl/spaarti)
-[![Coverage Status](https://img.shields.io/codecov/c/github/akerl/spaarti.svg)](https://codecov.io/github/akerl/spaarti)
-[![Code Quality](https://img.shields.io/codacy/65bacb9d92d948f6ae637ce63ade3557.svg)](https://www.codacy.com/app/akerl/spaarti)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/akerl/spaarti/Build)](https://github.com/akerl/spaarti/actions)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
 
 Tool to maintain local clones of repos you have access to on GitHub
