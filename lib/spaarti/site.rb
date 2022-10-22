@@ -12,7 +12,7 @@ module Spaarti
     auth_file: :default,
     config_file: File.expand_path('~/.spaarti.yml'),
     exclude: [],
-    format: '%<full_name>s',
+    formats: [{ path: '%<full_name>s' }],
     git_config: {},
     quiet: false,
     purge: false,

@@ -8,7 +8,7 @@ module Spaarti
       @data = data
       @client = client
       @options = params
-      @path = @options[:format] % @data
+      @path = resolve_path(@options[:formats], @data) % @data
     end
 
     def sync!
@@ -25,6 +25,15 @@ module Spaarti
     end
 
     private
+
+    def resolve_path(formats, data)
+      formats.each do |format|
+        return format[:path] if format[:match].nil?
+        next unless data[:full_name].include? format[:match]
+        return format[:path]
+      end
+      raise 'No valid path format found'
+    end
 
     def log(msg)
       puts msg unless @options[:quiet]

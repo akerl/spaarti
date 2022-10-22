@@ -19,14 +19,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'cymbal', '~> 2.0.0'
   s.add_dependency 'mercenary', '~> 0.3.4'
-  s.add_dependency 'octoauth', '~> 1.7.0'
-  s.add_dependency 'octokit', '~> 4.18.0'
+  s.add_dependency 'octoauth', '~> 2.0.0'
+  s.add_dependency 'octokit', '~> 5.6.1'
 
-  s.add_development_dependency 'fuubar', '~> 2.5.0'
   s.add_development_dependency 'goodcop', '~> 0.9.7'
-  s.add_development_dependency 'rake', '~> 13.0.0'
-  s.add_development_dependency 'rspec', '~> 3.11.0'
-  s.add_development_dependency 'rubocop', '~> 1.35.0'
   s.add_development_dependency 'vcr', '~> 5.0.0'
   s.add_development_dependency 'webmock', '~> 3.7.6'
   s.metadata['rubygems_mfa_required'] = 'true'

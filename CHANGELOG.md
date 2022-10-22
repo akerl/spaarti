@@ -1,3 +1,7 @@
+# 3.0.0 / 2022-10-21
+
+* [FEATURE] Uses formats instead of format, to support multiple paths based on repo name
+
 # 2.0.2 / 2020-05-12
 
 * [BUGFIX] Fix Octokit error
