@@ -19,7 +19,7 @@ module Spaarti
     purge: false,
     url_type: 'ssh',
     api_endpoint: nil,
-    max_workers: 1,
+    max_workers: 1
   }.freeze
 
   ##
@@ -34,7 +34,7 @@ module Spaarti
 
     def sync!
       Dir.chdir(File.expand_path(@options[:base_path])) do
-        Parallel.each(repos, { in_processes: @options[:max_workers] } ) { |x| x.sync! }
+        Parallel.each(repos, { in_processes: @options[:max_workers] }, &:sync!)
         purge! if @options[:purge]
       end
     end
@@ -79,10 +79,10 @@ module Spaarti
     end
 
     def repos
-      @repos ||= client.repos.map do |data|
+      @repos ||= client.repos.filter_map do |data|
         next if excluded(data)
         Repo.new data.to_h, client, @options
-      end.compact
+      end
     end
 
     def excluded(data)
