@@ -5,7 +5,7 @@ require 'spaarti/version'
 Gem::Specification.new do |s|
   s.name        = 'spaarti'
   s.version     = Spaarti::VERSION
-  s.required_ruby_version = '>= 2.6'
+  s.required_ruby_version = '>= 2.7'
 
   s.summary     = 'Helper for cloning GitHub repos'
   s.description = 'Maintain local clones of repos you have access to on GitHub'
