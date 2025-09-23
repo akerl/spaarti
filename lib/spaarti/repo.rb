@@ -20,7 +20,7 @@ module Spaarti
       end
     end
 
-    def parent_of(repo)
+    def parent_of(repo) # rubocop:disable Naming/PredicateMethod
       repo.relative_path_from(Pathname.new(@path)).each_filename.first != '..'
     end
 
@@ -49,7 +49,7 @@ module Spaarti
     end
 
     def url
-      @url ||= @data["#{@options[:url_type]}_url".to_sym]
+      @url ||= @data[:"#{@options[:url_type]}_url"]
     end
 
     def clone
